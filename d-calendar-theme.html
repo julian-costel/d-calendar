@@ -46,7 +46,7 @@
     transition: all .3s;
   }
   :host(.light-theme) #selectedDateHeader {
-    background: {{scaleColor(g.dCalendar.accentColor, 10)}};
+    background: {{dCalendarScaleColor(g.dCalendar.accentColor, 10)}};
   }
   #wrapper[horizontal] #selectedDateHeader {
     height: 264px;
@@ -305,11 +305,9 @@
     CoreStyle.g.dCalendar = {
       accentColor: '#2196F3',
       bgColor: '#2c3a40' 
-    };
+    };    
 
-    document._currentScript.ownerDocument.getElementById('d-calendar-theme').scaleColor = scaleColor;
-
-    function scaleColor(col, amt) {
+    PolymerExpressions.prototype.dCalendarScaleColor = function(col, amt) {
       var usePound = false;
       if (col[0] == "#") {
         col = col.slice(1);
@@ -326,8 +324,8 @@
       if (g > 255) g = 255;
       else if (g < 0) g = 0;
       return (usePound?"#":"") + String("000000" + (g | (b << 8) | (r << 16)).toString(16)).slice(-6);
-    }
-    
+    };
+	 
   })()
 
 </script>
